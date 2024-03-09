@@ -117,7 +117,7 @@ infoCategory = infoCategory.rename(columns={'product_category_name_english': 'pr
 infoCategory = infoCategory.rename(columns={'order_item_id': 'jumlah_terjual'})
 
 
-st.subheader("Mengidentifikasi produk-produk terlaris (populer) dan produk-produk terbawah (kurang populer"))
+st.subheader("Mengidentifikasi produk-produk terlaris (populer) dan produk-produk terbawah (kurang populer")
 
 # Ambil data count_kategori
 count_kategori = infoCategory['product_category'].value_counts()
@@ -136,7 +136,7 @@ kategori_tail = count_kategori.tail(10)
 st.write("Kategori Terbawah (Top 10):")
 st.dataframe(pd.DataFrame(kategori_tail))
 
-st.subheader("Menganalisis pola penjualan dari produk yang paling diminati selama beberapa tahun terakhir"))
+st.subheader("Menganalisis pola penjualan dari produk yang paling diminati selama beberapa tahun terakhir")
 
 # Menentukan trend penjualan kategori terlaris
 terlaris = count_kategori.head(10)
@@ -154,7 +154,7 @@ terlaris_2 = terlaris.index[1]
 terlaris_2 = infoCategory[infoCategory['product_category'] == terlaris_2]
 
 terlaris_3 = terlaris.index[2]
-terlaris_3 = kinfoCategory[infoCategory['product_category'] == terlaris_3]
+terlaris_3 = infoCategory[infoCategory['product_category'] == terlaris_3]
 
 terlaris_4 = terlaris.index[3]
 terlaris_4 = infoCategory[infoCategory['product_category'] == terlaris_4]
@@ -206,8 +206,14 @@ sales_category10= terlaris_10.groupby('month_year')['jumlah_terjual'].count()
 ## Visualization & Explanatory Analysis
 
 st.header('Visualisasi Data')
+
+#sidebar
+st.sidebar.header('Settiing Visualisasi Data')
+
+
 st.subheader('Pertanyaan 1: Apa saja produk-produk terlaris (populer) dan produk-produk terbawah (kurang populer)?')
 
+# Warna untuk plot
 color1 = ["#B0C5A4","#6196A6","#6196A6","#6196A6","#6196A6"]
 color2 = ["#6196A6","#6196A6","#6196A6","#6196A6","#D37676"]
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 6))
@@ -232,16 +238,66 @@ st.subheader('Pertanyaan 2: Bagaimana pola penjualan dari produk yang paling dim
 # Plot kategori trend
 plt.figure(figsize=(9, 6))
 
-sales_category1.plot(kind='line', marker='o', color='grey', markerfacecolor='black', markersize=8, label='Bed & Bath')
-sales_category2.plot(kind='line', marker='o', color='purple', markerfacecolor='black', markersize=8, label='Health & Beauty')
-sales_category3.plot(kind='line', marker='o', color='pink', markerfacecolor='black', markersize=8, label='Sports & Leisure')
-sales_category4.plot(kind='line', marker='o', color='cyan', markerfacecolor='black', markersize=8, label='Furniture & Decor')
-sales_category5.plot(kind='line', marker='o', color='brown', markerfacecolor='black', markersize=8, label='Computers & Accessories')
-sales_category6.plot(kind='line', marker='o', color='blue', markerfacecolor='black', markersize=8, label='Housewares')
-sales_category7.plot(kind='line', marker='o', color='red', markerfacecolor='black', markersize=8, label='waches gifts')
-sales_category8.plot(kind='line', marker='o', color='green', markerfacecolor='black', markersize=8, label='telephony')
-sales_category9.plot(kind='line', marker='o', color='purple', markerfacecolor='black', markersize=8, label='garden tools')
-sales_category10.plot(kind='line', marker='o', color='yellow', markerfacecolor='black', markersize=8, label='auto')
+#pilih warna gemoy
+color1 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 1',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category1.plot(kind='line', marker='o', color=color1, markerfacecolor='black', markersize=8, label='Bed & Bath')
+
+color2 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 2',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category2.plot(kind='line', marker='o', color=color2, markerfacecolor='black', markersize=8, label='Health & Beauty')
+
+color3 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 3',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category3.plot(kind='line', marker='o', color=color3, markerfacecolor='black', markersize=8, label='Sports & Leisure')
+
+color4 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 4',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category4.plot(kind='line', marker='o', color=color4, markerfacecolor='black', markersize=8, label='Furniture & Decor')
+
+color5 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 5',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category5.plot(kind='line', marker='o', color=color5, markerfacecolor='black', markersize=8, label='Computers & Accessories')
+
+color6 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 6',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category6.plot(kind='line', marker='o', color=color6, markerfacecolor='black', markersize=8, label='Housewares')
+
+color7 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 7',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category7.plot(kind='line', marker='o', color=color7, markerfacecolor='black', markersize=8, label='waches gifts')
+
+color8 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 8',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category8.plot(kind='line', marker='o', color=color8, markerfacecolor='black', markersize=8, label='telephony')
+
+color9 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 9',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category9.plot(kind='line', marker='o', color=color9, markerfacecolor='black', markersize=8, label='garden tools')
+
+color10 = st.sidebar.select_slider(
+    'Pilih warna untuk kategori pola 10',
+    options=['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'indigo', 'pink','violet','purple', 'grey']
+)
+sales_category10.plot(kind='line', marker='o', color=color10, markerfacecolor='black', markersize=8, label='auto')
 
 plt.title('Pola Penjualan Kategori Produk Paling diminati')
 plt.xlabel('Tahun')
